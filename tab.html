@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <style type="text/css">
+            ul.tabList{margin: 0; padding: 0; list-style: none;}
+            ul.tabList li{display: inline-block; vertical-align: top; padding: 10px; background: #eee; border: #ddd;}
+            .tabContent{background: #fafafa; border: 1px solid #eee; padding: 10px; min-height: 100px; display: none;}
+            .tabContent.open{display: block;}
+            .popupBox{display: none;}
+            .popupBox.open {display: block; position: absolute; z-index: 1; background: #fff; left: 0;right: 0; top: 0; bottom: 0; margin: auto; width: 50%; height: 50%;}
+            #overlayDiv{ position: absolute;  background: rgba(0,0,0,0.8); left: 0;right: 0; top: 0; bottom: 0; margin: auto;display: none;}
+           
+        </style>
+    </head>
+    <body>
+        <ul class="tabList">
+            <li data-link="tab-1">Tab 1</li>
+            <li data-link="tab-2">Tab 2</li>
+            <li data-link="tab-3">Tab 3</li>
+            <li data-link="tab-4">Tab 4</li>
+        </ul>
+
+        <div class="tabContent open" id="tab-1">This is tab1</div>
+        <div class="tabContent" id="tab-2">This is tab2</div>
+        <div class="tabContent" id="tab-3">This is tab3</div>
+        <div class="tabContent" id="tab-4">This is tab4</div>
+      
+        <a href="#" id="clickPopup">popup</a>
+        
+        <div class="popupBox">
+            this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup this is my popup 
+            <a href="#" class="close">close</a>
+        </div>
+        <div id="overlayDiv"></div>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <!--<script src="js/main.js"></script>-->
+        <script>
+            jQuery(document).ready(function($) {
+                $('.tabList li').click(function(){
+                    var tabId = $(this).attr('data-link');
+                    console.log(tabId);
+
+                    $('.tabContent').removeClass('open');
+                    $('#'+tabId).addClass('open');
+                });
+                $('#clickPopup').click(function(e){
+                    e.stopPropagation();
+                    $('.popupBox').addClass('open');
+                    var wWidth = ($(window).width())+"px";
+                    var wHeight = ($(window).height())+"px";
+                    console.log(wWidth+','+wHeight);                  
+                    $('#overlayDiv').css({"width":wWidth,"height":wHeight,"display":"block"});
+                   //$("body").append(bgOverlay);
+                    console.log(bgOverlay);
+                });
+                $('.close').click(function(){
+                    $(this).parent().removeClass('open');
+                   $('#overlayDiv').css({"display":"none"});
+                });/**/
+            });
+        </script>
+    </body>
+</html>
